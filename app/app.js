@@ -34,6 +34,23 @@ angular
           }
         }
       })
+      .state('profile', {
+        url: '/profile',
+        controller: 'ProfileCtrl as profileCtrl',
+        templateUrl: 'users/profile.html',
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireSignIn().catch(function(){
+              $state.go('home');
+            });
+          },
+          profile: function(Users, Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded();
+            });
+          }
+        }
+      })
       .state('register', {
         url: '/register',
         controller:'AuthCtrl as authCtrl',
