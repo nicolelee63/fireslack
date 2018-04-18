@@ -18,11 +18,9 @@
       <div class="list-head">Direct Messages</div>
       <div class="channel" ng-repeat="user in channelsCtrl.users">
         <a ng-if="user.$id !== channelsCtrl.profile.$id" ui-sref="channels.direct({uid: user.$id})" ui-sref-active="selected">
-          <span class="presence" ng-class="{online: user.online}"></span>
           {{ user.displayName }}
         </a>
       </div>
-    </div>
 
     <div class="my-info">
       <img class="user-pic" ng-src="{{ channelsCtrl.getGravatar(channelsCtrl.profile.$id) }}" />
